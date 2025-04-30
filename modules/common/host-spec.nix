@@ -51,7 +51,7 @@
     isMinimal = lib.mkOption {
       type = lib.types.bool;
       default = false;
-      description = "Used to specify minimal confuguration";
+      description = "Used to specify minimal configuration";
     };
 
     isServer = lib.mkOption {
