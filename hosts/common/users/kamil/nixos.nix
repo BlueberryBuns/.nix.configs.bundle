@@ -37,7 +37,9 @@ in
   users.users.root = {
     shell = pkgs.zsh;
     hashedPasswordFile = config.users.users.${hostSpec.username}.hashedPasswordFile;
-    hashedPassword = config.users.users.${hostSpec.username}.hashedPassword; # This comes from hosts/common/optional/minimal.nix and gets overridden if sops is working
+    ### Password is admin for now 
+    hashedPassword = $y$j9T$YwLe5kwOoIB7V8I9POJG10$Xl4219/HcBXnreUJNVAsePAbpav7sA/cgxKcRUHvJP5;
+    # config.users.users.${hostSpec.username}.hashedPassword; # This comes from hosts/common/optional/minimal.nix and gets overridden if sops is working
     openssh.authorizedKeys.keys = config.users.users.${hostSpec.username}.openssh.authorizedKeys.keys; # root's ssh keys are mainly used for remote deployment.
   };
 }
