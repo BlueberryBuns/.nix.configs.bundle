@@ -15,9 +15,15 @@ in
   imports = lib.flatten [
     inputs.home-manager.${platformModules}.home-manager
     inputs.sops-nix.${platformModules}.sops
+
+    (map lib.custom.relativeToRoot [
+      "modules/common"
+    ])
   ];
   
-  networking.hostName = config.hostSpec.hostname;
+
+  
+  networking.hostName = config.hostSpec.hostName;
   environment.systemPackages = [ pkgs.openssh ];
 
   # document the part about package manager
