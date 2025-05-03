@@ -1,40 +1,69 @@
-###############################################################
-#
-#  Genesis - personal server
-#
-#  NixOs running on Ryzne 5 5600, Intel Arc A380, 32 GB RAM
-#
-###############################################################
-
 {
-    inputs,
-    lib,
-    config,
-    pkgs,
-    ...
+  inputs,
+  lib,
+  config,
+  pkgs,
+  ...
 }:
+
 {
-    imports = lib.flatten [
-        #
-        # ========== Hardware ==========
-        #
-        ./hardware-configuration.nix
-        inputs.hardware.nixosModules.common-cpu-amd
-        inputs.hardware.nixosModules.common-pc-ssd
 
-        #
-        # ========= Disk Layout =========
-        #
-        inputs.disko.nixosModules.disko
-        (lib.custom.relativeToRoot "hosts/common/disks/genesis.nix")
+  hostSpec = {
+    hostName = "aio";
+    useYubikey = true;
+    persistFolder = "/persist";
+  };
 
-        (map lib.custom.relativeToRoot [
-          "hosts/common/core"
+  imports = lib.flatten [
+    ./hardware-configuration.nix
+    inputs.hardware.nixosModules.common-cpu-amd
+    inputs.hardware.nixosModules.common-gpu-intel
+    inputs.hardware.nixosModules.common-pc-ssd
 
-        #
-        # ========= Optional pkgs =========
-        #
+    inputs.disko.nixosModules.disko
+    (lib.custom.relativeToRoot "hosts/common/disks/btrfs-impermanence.nix")
+    {
+        _module.args = {
+          device = "";
+          withSwap = true;
+          swapSize = 32;
+        };
+    }
 
-        ])
-    ];
+    (map lib.custom.relativeToRoot [
+        "hosts/common/core"
+
+        "hosts/common/optional/openssh.nix"
+    ])
+  ];
+
+  # TODO(Kamil): Add IPv6 networking later...
+  networking = {
+    networkmanager.enable = true;
+    enableIPv6 = false;
+  };
+
+  boot = {
+    initrd = { systemd.enable = true; };
+    kernelPackages = pkgs.unstable.linuxPackages_latest;
+    
+    loader = {
+      timeout = 3;
+      efi.canTouchEfiVariables = true;
+      systemd-boot = {
+        enable = true;
+        # When using plymouth, initrd can expand by a lot each time, so limit how many we keep around
+        configurationLimit = lib.mkDefault 10;
+      };
+    };
+  };
+
+  hardware.graphics.enable = true;
+  environment.systemPackages = builtins.attrValues {
+    inherit (pkgs)
+      ;
+  };
+
+  system.stateVersion = "24.11";
+
 }

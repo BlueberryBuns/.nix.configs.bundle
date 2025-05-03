@@ -5,10 +5,6 @@
   pkgs,
   ...
 }:
-let
-  inherit (config.hostSpec);
-
-in
 {
   
 }

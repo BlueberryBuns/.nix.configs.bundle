@@ -18,6 +18,7 @@ in
   users.users.${hostSpec.username} = {
     home = "/home/${hostSpec.username}";
     isNormalUser = true;
+    hashedPassword = "$y$j9T$YwLe5kwOoIB7V8I9POJG10$Xl4219/HcBXnreUJNVAsePAbpav7sA/cgxKcRUHvJP5";
     hashedPasswordFile = sopsHashedPasswordFile;
 
     extraGroups = lib.flatten [
@@ -38,7 +39,7 @@ in
     shell = pkgs.zsh;
     hashedPasswordFile = config.users.users.${hostSpec.username}.hashedPasswordFile;
     ### Password is admin for now 
-    hashedPassword = $y$j9T$YwLe5kwOoIB7V8I9POJG10$Xl4219/HcBXnreUJNVAsePAbpav7sA/cgxKcRUHvJP5;
+    hashedPassword = "$y$j9T$YwLe5kwOoIB7V8I9POJG10$Xl4219/HcBXnreUJNVAsePAbpav7sA/cgxKcRUHvJP5";
     # config.users.users.${hostSpec.username}.hashedPassword; # This comes from hosts/common/optional/minimal.nix and gets overridden if sops is working
     openssh.authorizedKeys.keys = config.users.users.${hostSpec.username}.openssh.authorizedKeys.keys; # root's ssh keys are mainly used for remote deployment.
   };

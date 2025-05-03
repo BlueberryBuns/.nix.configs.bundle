@@ -29,9 +29,9 @@
           inherit inputs outputs lib;
           isDarwin = false;
         };
-        modules = [ ./hosts/nixosConfigurations/${host} ];
+        modules = [ ./hosts/nixos/${host} ];
       };
-    }) (builtins.attrNames (builtins.readDir ./hosts/nixosConfigurations))
+    }) (builtins.attrNames (builtins.readDir ./hosts/nixos))
   );
 
   
