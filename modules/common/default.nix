@@ -1,7 +1,5 @@
-{ _ }:
+{ lib, ... }:
 
 {
-  imports = [
-    ./default.host-spec.nix
-  ];
+  imports = lib.custom.scanPaths ./.;
 }

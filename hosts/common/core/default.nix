@@ -18,10 +18,10 @@ in
   ];
   
   networking.hostName = config.hostSpec.hostname;
-  environment.systemPackages = [ openssh ];
+  environment.systemPackages = [ pkgs.openssh ];
 
   # document the part about package manager
-  home-manager.useGlobalPackages = true;
+  home-manager.useGlobalPkgs = true;
   home-manager.backupFileExtension = "hmbk"; # Extends to: home manager backup
 
   #

@@ -4,6 +4,7 @@
   withSwap ? false,
   swapSize,
   config,
+  ...
 }:
 
 {
@@ -46,7 +47,7 @@
                     ];
                   };
                   "@persist" = {
-                    mountpoint = "${config.hostSpec.persistFolder}";
+                    mountpoint = "/persist" ;#"${config.hostSpec.persistFolder}";
                     mountOptions = [
                       "compress=zstd"
                       "noatime"
