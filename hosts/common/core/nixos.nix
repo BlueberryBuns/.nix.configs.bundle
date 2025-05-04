@@ -33,4 +33,11 @@
     LC_TELEPHONE = "pl_PL.UTF-8";
     LC_TIME = "pl_PL.UTF-8";
   };
+
+  services.xserver.xkb = {
+    layout = "pl";
+    variant = "";
+  };
+
+  console.keyMap = "pl2";
 }

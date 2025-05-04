@@ -10,6 +10,7 @@
 
   hostSpec = {
     hostName = "aio";
+    isMinimal = true;
     useYubikey = true;
     persistFolder = "/persist";
   };
@@ -24,7 +25,7 @@
     (lib.custom.relativeToRoot "hosts/common/disks/btrfs-impermanence.nix")
     {
         _module.args = {
-          device = "";
+          device = "/dev/nvme0n1";
           withSwap = true;
           swapSize = 32;
         };

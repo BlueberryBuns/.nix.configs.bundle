@@ -20,7 +20,7 @@
             ESP = {
               priority = 1;
               name = "ESP";
-              size = "512M";
+              size = "1G";
               type = "EF00";
               content = {
                 type = "filesystem";
@@ -47,7 +47,7 @@
                     ];
                   };
                   "@persist" = {
-                    mountpoint = "/persist" ;#"${config.hostSpec.persistFolder}";
+                    mountpoint = "${config.hostSpec.persistFolder}";
                     mountOptions = [
                       "compress=zstd"
                       "noatime"
