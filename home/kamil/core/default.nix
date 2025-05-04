@@ -9,8 +9,7 @@
 {
   imports = lib.flatten [
     (map lib.custom.relativeToRoot [
-      "modules/common/host-spec.nix"
-      "modules/home"
+      "internal/common/host-spec.nix"
     ])
   ];
 
@@ -22,6 +21,7 @@
   home = {
     username = lib.mkDefault config.hostSpec.username;
     stateVersion = lib.mkDefault "24.11";
+    homeDirectory = lib.mkDefault config.hostSpec.home;
   };
 
   ####################################################################

@@ -9,9 +9,9 @@ let
   hostSpec = config.hostSpec;
   ifGroupsExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
 
-  sopsHashedPasswordFile = lib.optionalString (
-    !config.hostSpec.isMinimal
-  ) config.sops.secrets."passwords/${hostSpec.username}".path;   
+#  sopsHashedPasswordFile = lib.optionalString (
+#    !config.hostSpec.isMinimal
+#  ) config.sops.secrets."passwords/${hostSpec.username}".path;   
 in 
 {
   users.mutableUsers = false;
@@ -19,7 +19,7 @@ in
     home = "/home/${hostSpec.username}";
     isNormalUser = true;
     hashedPassword = "$y$j9T$YwLe5kwOoIB7V8I9POJG10$Xl4219/HcBXnreUJNVAsePAbpav7sA/cgxKcRUHvJP5";
-    hashedPasswordFile = sopsHashedPasswordFile;
+#   hashedPasswordFile = sopsHashedPasswordFile;
 
     extraGroups = lib.flatten [
       "wheel"
@@ -37,7 +37,7 @@ in
 
   users.users.root = {
     shell = pkgs.zsh;
-    hashedPasswordFile = config.users.users.${hostSpec.username}.hashedPasswordFile;
+    # hashedPasswordFile = config.users.users.${hostSpec.username}.hashedPasswordFile;
     ### Password is admin for now 
     hashedPassword = "$y$j9T$YwLe5kwOoIB7V8I9POJG10$Xl4219/HcBXnreUJNVAsePAbpav7sA/cgxKcRUHvJP5";
     # config.users.users.${hostSpec.username}.hashedPassword; # This comes from hosts/common/optional/minimal.nix and gets overridden if sops is working

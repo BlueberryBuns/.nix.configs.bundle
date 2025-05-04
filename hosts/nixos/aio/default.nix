@@ -10,8 +10,7 @@
 
   hostSpec = {
     hostName = "aio";
-    isMinimal = true;
-    useYubikey = true;
+    useYubikey = lib.mkForce true;
     persistFolder = "/persist";
   };
 
