@@ -18,6 +18,9 @@ in
 
     (map lib.custom.relativeToRoot [
       "modules/common"
+
+      "hosts/common/users/kamil"
+      "hosts/common/users/kamil/${platform}.nix"
     ])
   ];
   
