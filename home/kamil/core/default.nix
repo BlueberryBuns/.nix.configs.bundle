@@ -1,4 +1,10 @@
-{}:
+{
+  config,
+  lib,
+  pkgs,
+  hostSpec,
+  ...
+}:
 
 {
   imports = lib.flatten [
@@ -13,6 +19,10 @@
   services.ssh-agent.enable = true;
 
   ################## home manager config here ########################
+  home = {
+    username = lib.mkDefault config.hostSpec.username;
+    stateVersion = lib.mkDefault "24.11";
+  };
 
   ####################################################################
 

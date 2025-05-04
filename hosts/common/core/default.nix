@@ -24,7 +24,9 @@ in
     ])
   ];
   
-
+  hostSpec = {
+    username = "kamil";
+  };
   
   networking.hostName = config.hostSpec.hostName;
   environment.systemPackages = [ pkgs.openssh ];
